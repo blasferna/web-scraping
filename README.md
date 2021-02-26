@@ -8,6 +8,8 @@ Just a web scraping practices in Python
 
 ## Install
 ```
+git clone https://github.com/blasferna/web-scraping.git
+cd web-scraping
 python3 -m venv venv
 pip install -r requirements.txt
 ```
