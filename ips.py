@@ -46,5 +46,5 @@ def consulta_asegurado(nro_cic):
         print(e)
 
 if __name__ == '__main__':
-    data = consulta_asegurado(5049813)
+    data = consulta_asegurado(1234567)
     print(data)
