@@ -22,11 +22,23 @@ def consulta_asegurado(nro_cic):
             "html.parser"
         )
         
-        master = soup.select('form > table')[1]
-        head = master.select('th')
-        data_row = master.select('td')
-        
-        return dict(zip(map(clean_data, head), map(clean_data,data_row)))
+        table = soup.select('form > table')[1]
+        head = table.select('th')
+        data_row = table.select('td')
+        titular = dict(zip(map(clean_data, head), map(clean_data,data_row)))
+
+        table = soup.select('form > table')[2]
+        head = table.select('th')
+        data_row = table.select('tr')
+
+        patronales = []
+        for i in range(1, len(data_row)):
+            patronales.append(dict(zip(map(clean_data, head), map(clean_data,data_row[i].select('td')))))
+
+        return {
+            "Titular": titular,
+            "Patronales": patronales
+        }
         
     except requests.ConnectionError:
         print("Connection Error")
@@ -34,5 +46,5 @@ def consulta_asegurado(nro_cic):
         print(e)
 
 if __name__ == '__main__':
-    data = consulta_asegurado(1234567)
+    data = consulta_asegurado(5049813)
     print(data)
